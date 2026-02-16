@@ -1,1 +1,4 @@
 venv/
+credentials.json
+.env
+clientcreds.txt
