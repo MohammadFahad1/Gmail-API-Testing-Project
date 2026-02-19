@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-!jbs79^)6)sccepy#o9aie%-o9j2+s)bz9tobykr#r&g8x%8(1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'gmail'
+    'gmail',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,3 +126,16 @@ STATIC_URL = 'static/'
 GOOGLE_CLIENT_ID=config('GOOGLE_CLIENT_ID', cast=str)
 GOOGLE_CLIENT_SECRET=config('GOOGLE_CLIENT_SECRET', cast=str)
 GOOGLE_REDIRECT_URI=config('GOOGLE_REDIRECT_URI', cast=str)
+
+
+CORS_ALLOW_ALL_ORIGINS = False  # Ensure this is False in production
+
+CORS_ALLOWED_ORIGINS = [
+    "https://your-frontend-address.com",
+    "http://localhost:3000", # Example for local development
+    "http://127.0.0.1:8000", # Example for a specific IP and port
+    "http://10.10.13.43:8000", # Example for a specific IP and port
+]
+
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
